@@ -45,14 +45,16 @@
                             <td>{{ $category->id}}</td>
                             <td>{{ $category->name}}</td>
                             <td>{{ $category->description}}</td>
-                            <td>
-                                <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-primary" role="button">Edit</a>
-                                <form method="post" action="{{ route('category.delete', $category->id) }}" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>
-                                </form>
-                            </td>
+                            @if(Auth::user()->role_id == 1)
+                                <td>
+                                    <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-primary" role="button">Edit</a>
+                                    <form method="post" action="{{ route('category.delete', $category->id) }}" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>
+                                    </form>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
